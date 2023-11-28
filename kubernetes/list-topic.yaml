@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: kcat-list 
+spec:
+  template:
+    spec:
+      containers:
+      - name: topic-create
+        image: edenhill/kcat:1.7.1
+        command: ["kcat", "-b", "kafka-no-keeper-bootstrap:9092", "-L"]
+        resources:
+          limits:
+            cpu: 500m
+            memory: 500Mi
+      restartPolicy: Never
+
